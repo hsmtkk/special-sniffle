@@ -14,5 +14,7 @@ export default defineEventHandler(async (event) => {
         key,
     }
     const resp = await $fetch(url, { params })
+    console.log("resp")
+    console.log(resp)
     return resp.items
 })

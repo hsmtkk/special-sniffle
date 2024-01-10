@@ -7,7 +7,7 @@
         </v-row>
         <v-row>
             <v-col cols="3">
-                <v-btn v-on:click="search">検索する</v-btn>
+                <v-btn v-on:click="execute">検索する</v-btn>
             </v-col>
             <v-col cols="3">
                 <v-btn v-bind:to="{ name: 'book' }">一覧に戻る</v-btn>
@@ -40,18 +40,16 @@
 const DESCRIPTION_LENGTH = 100
 
 const keyword = ref("")
-const items = ref("")
 
-const search = async () => {
-    console.log("search")
-    const { data } = await useFetch("/api/search", { params: { q: keyword.value } })
-    console.log("data")
-    console.log(data)
-    items.value = data.value
-}
+const { data: items, execute } = useLazyFetch("/api/search", {
+    immediate: false,
+    params: { q: keyword }
+})
 
 const shorten = (orig: string) => {
-    return orig.slice(0, DESCRIPTION_LENGTH) + "..."
+    if (orig) {
+        return orig.slice(0, DESCRIPTION_LENGTH) + "..."
+    }
 }
 
 </script>
