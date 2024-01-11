@@ -15,5 +15,5 @@ export default defineEventHandler(async (event) => {
 
     console.log("resp")
     console.log(resp)
-    return resp.volumeInfo
+    return resp
 })

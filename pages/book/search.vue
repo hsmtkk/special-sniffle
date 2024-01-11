@@ -26,7 +26,7 @@
                             <v-divider />
                             {{ shorten(item.volumeInfo.description) }}
                             <v-card-actions>
-                                <v-btn icon="mdi-plus"></v-btn>
+                                <v-btn icon="mdi-plus" v-on:click="clickPlusIcon(item.id)"></v-btn>
                             </v-card-actions>
                         </v-col>
                     </v-row>
@@ -52,4 +52,16 @@ const shorten = (orig: string) => {
     }
 }
 
+const clickPlusIcon = (bookId: string) => {
+    console.log("clickPlusIcon")
+    console.log(bookId)
+    const books = useCookie("bookIds", {
+        default: () => {
+            return []
+        }
+    })
+    if (bookId.length > 0) {
+        books.value.push(bookId)
+    }
+}
 </script>
